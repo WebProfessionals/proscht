@@ -156,10 +156,25 @@
           })
       },
       saveAnswer: function () {
-        console.log('save answer')
+        // first or not?
+        let self = this
+        fb.gamesCollection.doc(this.gameId).get().then(function (doc) {
+          if (doc.exists) {
+            if (doc.data().currentWinner) {
+              fb.gamesCollection.doc(self.gameId).set({
+                currentLooser: self.currentUser.uid
+              }, { merge: true })
+            } else {
+              fb.gamesCollection.doc(self.gameId).set({
+                currentWinner: self.currentUser.uid,
+                currentLooser: self.currentUser.uid
+              }, { merge: true })
+            }
+          }
+        })
         fb.gamesCollection.doc(this.gameId).set({
-          currentWinner: fb.firebase.firestore.FieldValue.serverTimestamp(),
-          currentLooser: fb.firebase.firestore.FieldValue.serverTimestamp()
+          currentWinner: this.currentUser.uid,
+          currentLooser: this.currentUser.uid
         }, { merge: true })
       }
     }
