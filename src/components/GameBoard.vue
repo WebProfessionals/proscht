@@ -43,16 +43,16 @@
         </v-layout>
         <v-layout row wrap>
           <v-flex xs12>
-            <v-btn block class="answer btn-1">Antwort 1: {{currentQuestion.answer1}}</v-btn>
+            <v-btn block class="answer btn-1" v-on:click="saveAnswer">Antwort 1: {{currentQuestion.answer1}}</v-btn>
           </v-flex>
           <v-flex xs12>
-            <v-btn block class="answer btn-2">Antwort 2: {{currentQuestion.answer2}}</v-btn>
+            <v-btn block class="answer btn-2" v-on:click="saveAnswer">Antwort 2: {{currentQuestion.answer2}}</v-btn>
           </v-flex>
           <v-flex xs12>
-            <v-btn block class="answer btn-3">Antwort 3: {{currentQuestion.answer3}}</v-btn>
+            <v-btn block class="answer btn-3" v-on:click="saveAnswer">Antwort 3: {{currentQuestion.answer3}}</v-btn>
           </v-flex>
           <v-flex xs12>
-            <v-btn block class="answer btn-4">Antwort 4: {{currentQuestion.answer4}}</v-btn>
+            <v-btn block class="answer btn-4" v-on:click="saveAnswer">Antwort 4: {{currentQuestion.answer4}}</v-btn>
           </v-flex>
         </v-layout>
       </v-flex>
@@ -131,7 +131,9 @@
           console.log(questionsArray)
           // ID vom aktueller Quizfrage im aktuellen Game eintragen
           fb.gamesCollection.doc(self.gameId).set({
-            currentQuestion: questionsArray[self.randomValue(0, 1)].id
+            currentQuestion: questionsArray[self.randomValue(0, 1)].id,
+            currentWinner: null,
+            currentLooser: null
           })
         })
       },
@@ -152,6 +154,13 @@
           .onSnapshot(function (doc) {
             self.currentQuestion = doc.data()
           })
+      },
+      saveAnswer: function () {
+        console.log('save answer')
+        fb.gamesCollection.doc(this.gameId).set({
+          currentWinner: fb.firebase.firestore.FieldValue.serverTimestamp(),
+          currentLooser: fb.firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge: true })
       }
     }
   }

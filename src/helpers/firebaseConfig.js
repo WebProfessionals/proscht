@@ -26,6 +26,7 @@ const gamesCollection = db.collection('games')
 const quizCollection = db.collection('questions')
 
 export {
+  firebase,
   auth,
   currentUser,
   gamesCollection,
