@@ -1,7 +1,7 @@
 <template>
     <div class="text-xs-center container">
         <v-container fluid grid-list-xl>
-        <h2 class="display-3">Wähle eine Figur</h2>
+        <h2 class="display-3">Wähle deine Figur</h2>
         <v-btn class="player-button"><img src="@/assets/img/luckyluke.svg" alt="Lucky Luke"></v-btn>
         <v-btn class="player-button"><img src="@/assets/img/luckyluke.svg" alt="Lucky Luke"></v-btn>
         <v-btn class="player-button"><img src="@/assets/img/luckyluke.svg" alt="Lucky Luke"></v-btn>
@@ -19,6 +19,7 @@
     .player-button {
         width: 15em;
         height: auto;
+        padding: 20px;
     }
 
     .theme--light.v-btn:not(.v-btn--icon):not(.v-btn--flat) {
