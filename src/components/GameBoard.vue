@@ -24,30 +24,30 @@
         GAME ON!
       </v-flex>
     </v-layout>
-    <v-layout row wrap class="game-board_footer">
+    <v-layout row align-center wrap class="game-board_footer">
       <v-flex xs2>
-        <img src="@/assets/img/powerUp-dummy.svg">
+        <img src="@/assets/img/attack.svg">
       </v-flex>
       <v-flex xs2>
-        <img src="@/assets/img/powerUp-dummy.svg">
+        <img src="@/assets/img/shield.svg">
       </v-flex>
       <v-flex xs2>
-        <img src="@/assets/img/powerUp-dummy.svg">
+        <img src="@/assets/img/bomb.svg">
       </v-flex>
       <v-flex xs2>
-        <img src="@/assets/img/powerUp-dummy.svg">
+
       </v-flex>
       <v-flex xs2>
-        <img src="@/assets/img/powerUp-dummy.svg">
+
       </v-flex>
       <v-flex xs2>
-        <img src="@/assets/img/powerUp-dummy.svg">
+
       </v-flex>
       <v-flex xs2>
-        <img src="@/assets/img/powerUp-dummy.svg">
+
       </v-flex>
       <v-flex xs2>
-        <img src="@/assets/img/powerUp-dummy.svg">
+
       </v-flex>
     </v-layout>
   </v-container>
@@ -71,18 +71,14 @@
   }
 
   .game-board_footer {
-      background-color: grey;
-      border-top: 3px solid yellow;
+      background-color: white;
+      border-top: 3px solid red;
       height: 10rem;
     }
   .game-board_body {
     background-color: black;
     color: white;
     height: calc(100vh - 15rem);
-  }
-  .game-board_header {
-    background-color: yellow;
-    border-bottom: 3px solid grey;
   }
 
 </style>

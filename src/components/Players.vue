@@ -1,11 +1,11 @@
 <template>
     <div class="text-xs-center container">
         <v-container fluid grid-list-xl>
-        <h2 class="display-3">Wähle deine Figur</h2>
-        <v-btn class="player-button"><img src="@/assets/img/luckyluke.svg" alt="Lucky Luke"></v-btn>
-        <v-btn class="player-button"><img src="@/assets/img/supermario.svg" alt="Lucky Luke"></v-btn>
-        <v-btn class="player-button"><img src="@/assets/img/lukeskywalker.svg" alt="Lucky Luke"></v-btn>
-        <v-btn class="player-button"><img src="@/assets/img/peach.svg" alt="Lucky Luke"></v-btn>
+            <h2 class="display-3">Wähle deine Figur</h2>
+            <v-btn class="player-button"><img src="@/assets/img/luckyluke.svg" alt="Lucky Luke"></v-btn>
+            <v-btn class="player-button"><img src="@/assets/img/supermario.svg" alt="Lucky Luke"></v-btn>
+            <v-btn class="player-button"><img src="@/assets/img/lukeskywalker.svg" alt="Lucky Luke"></v-btn>
+            <v-btn class="player-button"><img src="@/assets/img/peach.svg" alt="Lucky Luke"></v-btn>
         </v-container>
     </div>
 </template>
@@ -13,9 +13,10 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-    h2 {
+    h2.display-3 {
         margin-bottom: 40px;
     }
+
     .player-button {
         width: 12em;
         height: auto;

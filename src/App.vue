@@ -28,10 +28,13 @@ export default {
 </script>
 
 <style scoped>
-  body {
-    font-family: 'Roboto', sans-serif;
-  }
 
+  body {
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+  }
   .container {
     padding: 0;
   }
