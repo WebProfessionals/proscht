@@ -1,12 +1,12 @@
 <template>
-  <v-container fluid grid-list-xl>
+  <v-container fluid grid-list-xl class="game-board_container">
     <v-layout align-center justify-center row class="game-board_header">
-      <v-flex xs2 class="power-up_points--container text-xs-center">
+      <v-flex xs4 class="power-up_points--container text-xs-center">
         <p class="power-up_points--text">25</p>
       </v-flex>
       <v-spacer></v-spacer>
-      <v-flex xs3>
-        <v-layout row>
+      <v-flex xs6>
+        <v-layout row justify-end>
           <v-flex xs4>
             <img class="live_icon" src="@/assets/img/heart-dummy.svg">
           </v-flex>
@@ -25,28 +25,28 @@
       </v-flex>
     </v-layout>
     <v-layout row wrap class="game-board_footer">
-      <v-flex xs1>
+      <v-flex xs2>
         <img src="@/assets/img/powerUp-dummy.svg">
       </v-flex>
-      <v-flex xs1>
+      <v-flex xs2>
         <img src="@/assets/img/powerUp-dummy.svg">
       </v-flex>
-      <v-flex xs1>
+      <v-flex xs2>
         <img src="@/assets/img/powerUp-dummy.svg">
       </v-flex>
-      <v-flex xs1>
+      <v-flex xs2>
         <img src="@/assets/img/powerUp-dummy.svg">
       </v-flex>
-      <v-flex xs1>
+      <v-flex xs2>
         <img src="@/assets/img/powerUp-dummy.svg">
       </v-flex>
-      <v-flex xs1>
+      <v-flex xs2>
         <img src="@/assets/img/powerUp-dummy.svg">
       </v-flex>
-      <v-flex xs1>
+      <v-flex xs2>
         <img src="@/assets/img/powerUp-dummy.svg">
       </v-flex>
-      <v-flex xs1>
+      <v-flex xs2>
         <img src="@/assets/img/powerUp-dummy.svg">
       </v-flex>
     </v-layout>
@@ -55,25 +55,30 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .container.grid-list-xl.game-board_container .layout:not(:only-child) {
+    margin: 0;
+  }
   .power-up_points--text {
-    font-size: 7rem;
+    font-size: 3rem;
     font-weight: bolder;
-    line-height: 9rem;
+    line-height: 3rem;
   }
 
   .power-up_points--container {
     border-right: 2px solid gray;
-    box-shadow: 2px 2px 20px black;
-    height: 10rem;;
+    box-shadow: 0px 2px 10px black;
+    height: 5rem;
   }
 
   .game-board_footer {
       background-color: grey;
       border-top: 3px solid yellow;
+      height: 10rem;
     }
   .game-board_body {
     background-color: black;
     color: white;
+    height: calc(100vh - 15rem);
   }
   .game-board_header {
     background-color: yellow;
