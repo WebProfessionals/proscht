@@ -36,15 +36,25 @@
             ID aktuelle Frage: {{currentGame.currentQuestion}}<br>
           </v-flex>
         </v-layout>
-
-
-
-
-        Frage: {{currentQuestion.question}}<br>
-        Antwort 1: {{currentQuestion.answer1}}<br>
-        Antwort 2: {{currentQuestion.answer2}}<br>
-        Antwort 3: {{currentQuestion.answer3}}<br>
-        Antwort 4: {{currentQuestion.answer4}}<br>
+        <v-layout row>
+          <v-flex xs12 class="question">
+            Frage: {{currentQuestion.question}}
+          </v-flex>
+        </v-layout>
+        <v-layout row wrap>
+          <v-flex xs12>
+            <v-btn block class="answer btn-1">Antwort 1: {{currentQuestion.answer1}}</v-btn>
+          </v-flex>
+          <v-flex xs12>
+            <v-btn block class="answer btn-2">Antwort 2: {{currentQuestion.answer2}}</v-btn>
+          </v-flex>
+          <v-flex xs12>
+            <v-btn block class="answer btn-3">Antwort 3: {{currentQuestion.answer3}}</v-btn>
+          </v-flex>
+          <v-flex xs12>
+            <v-btn block class="answer btn-4">Antwort 4: {{currentQuestion.answer4}}</v-btn>
+          </v-flex>
+        </v-layout>
       </v-flex>
     </v-layout>
     <v-layout row align-center wrap class="game-board_footer">
