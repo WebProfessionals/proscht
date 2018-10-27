@@ -41,7 +41,7 @@
     },
     methods: {
       startGame: function () {
-        this.$router.push({ path: 'gameboard', query: { gid: this.gameId } })
+        this.$router.push({ path: 'join', query: { gid: this.gameId } })
       },
       createGame: function () {
         fb.gamesCollection.add({
