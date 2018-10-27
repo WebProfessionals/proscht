@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{count}}<br>
     <v-btn v-on:click="startImport"></v-btn>
   </div>
 </template>
@@ -634,6 +635,11 @@
             'answer4': 'Number.MAX_VALUE * 2 === Infinity'
           }
         ]
+      }
+    },
+    computed: {
+      count () {
+        return this.questions.length
       }
     },
     methods: {

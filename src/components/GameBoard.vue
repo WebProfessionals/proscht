@@ -45,16 +45,16 @@
         </v-layout>
         <v-layout row wrap>
           <v-flex xs12 id="btn-1">
-            <v-btn block class="answer btn-1" v-on:click="saveAnswer">Antwort 1: {{currentQuestion.answer1}}</v-btn>
+            <v-btn block class="answer btn-1" v-on:click="saveAnswer(true)">{{currentQuestion.answer1}}</v-btn>
           </v-flex>
           <v-flex xs12 id="btn-2">
-            <v-btn block class="answer btn-2" v-on:click="saveAnswer">Antwort 2: {{currentQuestion.answer2}}</v-btn>
+            <v-btn block class="answer btn-2" v-on:click="saveAnswer(false)">{{currentQuestion.answer2}}</v-btn>
           </v-flex>
           <v-flex xs12 id="btn-3">
-            <v-btn block class="answer btn-3" v-on:click="saveAnswer">Antwort 3: {{currentQuestion.answer3}}</v-btn>
+            <v-btn block class="answer btn-3" v-on:click="saveAnswer(false)">{{currentQuestion.answer3}}</v-btn>
           </v-flex>
           <v-flex xs12 id="btn-4">
-            <v-btn block class="answer btn-4" v-on:click="saveAnswer">Antwort 4: {{currentQuestion.answer4}}</v-btn>
+            <v-btn block class="answer btn-4" v-on:click="saveAnswer(false)">{{currentQuestion.answer4}}</v-btn>
           </v-flex>
         </v-layout>
       </v-flex>
@@ -135,7 +135,7 @@
           console.log(questionsArray)
           // ID vom aktueller Quizfrage im aktuellen Game eintragen
           fb.gamesCollection.doc(self.gameId).set({
-            currentQuestion: questionsArray[self.randomValue(0, 1)].id,
+            currentQuestion: questionsArray[self.randomValue(0, 88)].id,
             currentWinner: null,
             currentLooser: null
           })
@@ -165,12 +165,12 @@
             self.currentQuestion = doc.data()
           })
       },
-      saveAnswer: function () {
+      saveAnswer: function (result) {
         // first or not?
         let self = this
         fb.gamesCollection.doc(this.gameId).get().then(function (doc) {
           if (doc.exists) {
-            if (doc.data().currentWinner) {
+            if (doc.data().currentWinner || result === false) {
               fb.gamesCollection.doc(self.gameId).set({
                 currentLooser: self.currentUser.uid
               }, { merge: true })
