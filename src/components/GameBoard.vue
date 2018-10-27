@@ -128,6 +128,7 @@
             tempItem.id = doc.id
             questionsArray.push(tempItem)
           })
+          console.log(questionsArray)
           // ID vom aktueller Quizfrage im aktuellen Game eintragen
           fb.gamesCollection.doc(self.gameId).set({
             currentQuestion: questionsArray[self.randomValue(0, 1)].id
