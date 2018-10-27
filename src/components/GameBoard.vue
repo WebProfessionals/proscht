@@ -181,10 +181,6 @@
             }
           }
         })
-        fb.gamesCollection.doc(this.gameId).set({
-          currentWinner: this.currentUser.uid,
-          currentLooser: this.currentUser.uid
-        }, { merge: true })
       }
     }
   }
