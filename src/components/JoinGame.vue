@@ -27,15 +27,17 @@
       ...mapState(['currentUser'])
     },
     mounted: function () {
-      console.log('asdf', this.$route.query.gid)
+      console.log('uid', this.currentUser.uid)
       document.getElementById('gameIdInput').value = this.gameId
+      // this.gameId = ref.id
+      console.log('gid', this.gameId)
     },
     methods: {
       joinGame: function () {
-        fb.gamesCollection.doc(this.gameId).collection('players').add({
+        fb.gamesCollection.doc(this.gameId).collection('players').add({ // todo: rückgabewert der DB prüfen
           player: this.currentUser.uid
         }).then(ref => {
-          // this.gameId = ref.id
+          this.gameId = ref.id
           console.log(ref)
         }).catch(err => {
           console.log(err)

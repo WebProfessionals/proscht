@@ -15,8 +15,8 @@
             <v-btn small class="btnCopy text-xs-center" v-on:click="copyGameLink">copy</v-btn>
         </div>
         <br>
-        <!--UID: {{currentUser.uid}}<br>-->
-        <!--<p v-if="gameId">gameId: {{gameId}}</p>-->
+        UID: {{currentUser.uid}}<br>
+        <p v-if="gameId">gameId: {{gameId}}</p>
     </div>
 </template>
 
@@ -48,9 +48,22 @@
         })
       },
 
-      copyGameLink: function () {
-        document.getElementById('gameLink').select()
+      copyGameLink () {
+        let link = document.getElementById('gameLink').innerHTML
+        // Create a dummy input to copy the string array inside it
+        var dummy = document.createElement('input')
+        // Add it to the document
+        document.body.appendChild(dummy)
+        // Set its ID
+        dummy.setAttribute('id', 'dummy_id')
+        // Output the array into it
+        document.getElementById('dummy_id').value = link
+        // Select it
+        dummy.select()
+        // Copy its contents
         document.execCommand('copy')
+        // Remove it as its not needed anymore
+        document.body.removeChild(dummy)
       }
     }
   }
@@ -79,11 +92,10 @@
     }
 
     .btnCopy {
-        margin: 15px auto;
+        margin: 0 auto;
     }
 
     .lbl {
-        padding-top: 25vh;
     }
 
     .linkBox {
@@ -93,7 +105,8 @@
     }
 
     code {
-        margin: 0 auto;
+        margin: 15px auto;
+        text-align: center;
     }
     @media (min-width: 480px) {
 
