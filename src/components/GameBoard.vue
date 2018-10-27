@@ -8,13 +8,13 @@
       <v-flex xs6>
         <v-layout row justify-end>
           <v-flex xs4>
-            <img class="live_icon" src="@/assets/img/heart-dummy.svg">
+            <img class="icon" src="@/assets/img/heart-dummy.svg">
           </v-flex>
           <v-flex xs4>
-            <img class="live_icon" src="@/assets/img/heart-dummy.svg">
+            <img class="icon" src="@/assets/img/heart-dummy.svg">
           </v-flex>
           <v-flex xs4>
-            <img class="live_icon" src="@/assets/img/heart-dummy.svg">
+            <img class="icon" src="@/assets/img/heart-dummy.svg">
           </v-flex>
         </v-layout>
       </v-flex>
@@ -26,13 +26,13 @@
     </v-layout>
     <v-layout row align-center wrap class="game-board_footer">
       <v-flex xs2>
-        <img src="@/assets/img/attack.svg">
+        <img class="icon" src="@/assets/img/attack.svg">
       </v-flex>
       <v-flex xs2>
-        <img src="@/assets/img/shield.svg">
+        <img class="icon" src="@/assets/img/shield.svg">
       </v-flex>
       <v-flex xs2>
-        <img src="@/assets/img/bomb.svg">
+        <img class="icon" src="@/assets/img/bomb.svg">
       </v-flex>
       <v-flex xs2>
 
@@ -76,7 +76,7 @@
       height: 10rem;
     }
 
-  .live_icon {
+  .icon {
     height: 3rem;
   }
 
