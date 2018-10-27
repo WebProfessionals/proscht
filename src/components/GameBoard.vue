@@ -24,10 +24,7 @@
         Game: {{gameId}}
         <br>
         <v-btn v-on:click="startRound">Runde starten</v-btn>
-        <hr>
-        aktuelle Frage Id: {{currentQuestionId}}
-        <hr>
-        Aktuelles Game: {{currentGame}}
+
         <hr>
         ID aktuelle Frage: {{currentGame.currentQuestion}}<br>
         Frage: {{currentQuestion.question}}<br>
@@ -95,24 +92,27 @@
       this.getGameData()
     },
     methods: {
+      randomValue: function (min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min
+      },
       startRound: function () {
-        let randomQuestion = 0 // TODO: Zufallszahl
         let questionsArray = []
         let self = this
-        // alle Fragen holen (unschöbner Workarozund aufgrund Zeitmangel)
+        // ID's aller Fragen holen (unschöner Workarozund aufgrund Zeitmangel)
         fb.quizCollection.get().then(function (querySnapshot) {
           querySnapshot.forEach(function (doc) {
             let tempItem = doc.data()
             tempItem.id = doc.id
             questionsArray.push(tempItem)
           })
-          // aktuelles Spiel eintragen
+          // ID vom aktueller Quizfrage im aktuellen Game eintragen
           fb.gamesCollection.doc(self.gameId).set({
-            currentQuestion: questionsArray[randomQuestion].id
+            currentQuestion: questionsArray[self.randomValue(0, 1)].id
           })
         })
       },
       getGameData: function () {
+        // ID der aktuellen Quizfrage laden
         let self = this
         fb.gamesCollection.doc(this.gameId)
           .onSnapshot(function (doc) {
@@ -121,6 +121,7 @@
           })
       },
       getQuestion: function () {
+        // Fragen und Antworten der aktuellen Quizfrage laden
         let self = this
         self.currentQuestion = {}
         fb.quizCollection.doc(this.currentGame.currentQuestion)
