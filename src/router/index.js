@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Beispiel from '@/components/Beispiel'
 import Players from '@/components/Players'
 import Home from '@/components/Home'
 import GameBoard from '@/components/GameBoard'
@@ -12,9 +11,9 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/beispiel',
-      name: 'Beispiel',
-      component: Beispiel
+      path: '/',
+      name: 'Home',
+      component: Home
     },
     {
       path: '/players',

@@ -1,8 +1,6 @@
 <template>
   <div>
     <h1>Authentifizierung erfolgreich</h1>
-    <p>uid: {{uid}}</p>
-    <p>user: {{user}}</p>
     <p>currentUser: {{currentUser}}</p>
 
   </div>

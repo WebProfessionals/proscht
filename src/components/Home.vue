@@ -5,6 +5,28 @@
     </div>
 </template>
 
+<script>
+  import { mapState } from 'vuex'
+  // const fb = require('../helpers/firebaseConfig')
+  export default {
+    name: 'Home',
+    data () {
+      return {
+      }
+    },
+    computed: {
+      ...mapState(['currentUser'])
+    },
+    mounted: function () {
+    },
+    methods: {
+      createGame: function () {
+
+      }
+    }
+  }
+</script>
+
 <style scoped>
     
     .proscht-logo {
