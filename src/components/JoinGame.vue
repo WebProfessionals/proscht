@@ -3,6 +3,7 @@
     Spiel beitreten
     <br>
     <v-text-field
+      id="gameIdInput"
       label="Game Id"
       v-model="gameId"
     ></v-text-field>
@@ -19,13 +20,15 @@
     name: 'Join',
     data () {
       return {
-        gameId: null
+        gameId: this.$route.query.gid
       }
     },
     computed: {
       ...mapState(['currentUser'])
     },
     mounted: function () {
+      console.log('asdf', this.$route.query.gid)
+      document.getElementById('gameIdInput').value = this.gameId
     },
     methods: {
       joinGame: function () {

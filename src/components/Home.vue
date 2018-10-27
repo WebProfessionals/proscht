@@ -49,9 +49,8 @@
       },
 
       copyGameLink: function () {
-        let testingCodeToCopy = document.querySelector('#gameLink')
-        testingCodeToCopy.setAttribute('type', 'text')
-        testingCodeToCopy.select()
+        document.getElementById('gameLink').select()
+        document.execCommand('copy')
       }
     }
   }
