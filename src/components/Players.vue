@@ -5,7 +5,7 @@
         <v-btn class="player-button"><img src="@/assets/img/luckyluke.svg" alt="Lucky Luke"></v-btn>
         <v-btn class="player-button"><img src="@/assets/img/supermario.svg" alt="Lucky Luke"></v-btn>
         <v-btn class="player-button"><img src="@/assets/img/lukeskywalker.svg" alt="Lucky Luke"></v-btn>
-        <v-btn class="player-button"><img src="@/assets/img/luckyluke.svg" alt="Lucky Luke"></v-btn>
+        <v-btn class="player-button"><img src="@/assets/img/peach.svg" alt="Lucky Luke"></v-btn>
         </v-container>
     </div>
 </template>
