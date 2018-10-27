@@ -6,6 +6,7 @@ import GameBoard from '@/components/GameBoard'
 import Auth from '@/components/Auth'
 import AuthSuccess from '@/components/AuthSuccess'
 import ShareLink from '@/components/ShareLink'
+import JoinGame from '@/components/JoinGame'
 
 Vue.use(Router)
 
@@ -45,6 +46,11 @@ export default new Router({
       path: '/link',
       name: 'ShareLink',
       component: ShareLink
+    },
+    {
+      path: '/join',
+      name: 'JoinGame',
+      component: JoinGame
     }
   ]
 })
