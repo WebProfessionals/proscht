@@ -60,7 +60,8 @@
 <style scoped>
 
     .proscht-logo {
-        width: 400px;
+        margin: 3em;
+        width: 30em;
     }
 
     .home {
@@ -74,10 +75,9 @@
     .button-start {
         background-color: black !important;
         color: white;
-        height: 150px;
-        width: 800px;
-        margin-top: 100px;
-        font-size: 70px;
+        height: 90px;
+        width: 11em;
+        font-size: 40px;
     }
 
     .btnCopy {

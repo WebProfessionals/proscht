@@ -30,7 +30,10 @@ export default {
 <style scoped>
 
   body {
-      font-family: 'IBM Plex Sans', sans-serif;
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
   }
 
   .container {
