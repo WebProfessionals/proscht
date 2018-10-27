@@ -29,8 +29,13 @@ export default {
 
 <style scoped>
   body {
-    font-family: "American Typewriter", sans-serif;
   }
+
+  .display-2, .display-3 {
+    font-family: "American Typewriter", sans-serif;
+    font-weight: 400;
+  }
+
   .container {
     padding: 0;
   }

@@ -1,6 +1,6 @@
 <template>
     <div class="text-xs-center">
-        <h2>Wähle eine Figur</h2>
+        <h2 class="display-3">Wähle eine Figur</h2>
         <v-btn class="player-button"><img src="@/assets/img/luckyluke.svg" alt="Lucky Luke"></v-btn>
         <v-btn class="player-button"><img src="@/assets/img/luckyluke.svg" alt="Lucky Luke"></v-btn>
         <v-btn class="player-button"><img src="@/assets/img/luckyluke.svg" alt="Lucky Luke"></v-btn>
@@ -12,6 +12,7 @@
 <style scoped>
     .player-button {
         width: 15em;
+        height: auto;
     }
 
     .theme--light.v-btn:not(.v-btn--icon):not(.v-btn--flat) {
