@@ -8,13 +8,13 @@
       <v-flex xs6>
         <v-layout row justify-end>
           <v-flex xs4>
-            <img class="icon" src="@/assets/img/heart-dummy.svg">
+            <img class="icon" src="@/assets/img/heart-dummy.svg" v-if="currentGameUserData.score>0">
           </v-flex>
           <v-flex xs4>
-            <img class="icon" src="@/assets/img/heart-dummy.svg">
+            <img class="icon" src="@/assets/img/heart-dummy.svg" v-if="currentGameUserData.score>1">
           </v-flex>
           <v-flex xs4>
-            <img class="icon" src="@/assets/img/heart-dummy.svg">
+            <img class="icon" src="@/assets/img/heart-dummy.svg" v-if="currentGameUserData.score>2">
           </v-flex>
         </v-layout>
       </v-flex>
@@ -26,11 +26,13 @@
             Game: {{gameId}}<br>
             Winner: {{currentGame.currentWinner}}<br>
             Looser: {{currentGame.currentLooser}}<br>
+            Score: {{currentGameUserData.score}}<br>
+            FirstRound: {{firstRound}}
           </v-flex>
         </v-layout>
         <v-layout row>
           <v-flex xs12>
-            <v-btn class="btn--new" block v-on:click="startRound">Runde starten</v-btn>
+            <v-btn class="btn--new" block v-on:click="startRound">Neue Runde starten</v-btn>
           </v-flex>
         </v-layout>
         <v-layout row>
@@ -95,11 +97,15 @@
     name: 'GameBoard',
     data () {
       return {
+        firstRound: true,
         gameId: this.$route.query.gid,
         currentGame: {
           currentQuestion: null,
           currentWinner: null,
           currentLooser: null
+        },
+        currentGameUserData: {
+          score: 3
         },
         allQuestions: [],
         currentQuestionId: null,
@@ -116,6 +122,7 @@
       ...mapState(['currentUser'])
     },
     mounted: function () {
+      this.getGameUserData()
       this.getGameData()
     },
     methods: {
@@ -123,6 +130,30 @@
         return Math.floor(Math.random() * (max - min + 1)) + min
       },
       startRound: function () {
+        if (!this.firstRound) {
+          console.log(this.currentGame.currentWinner)
+          console.log(this.currentGame.currentLooser)
+          // Gewinner Punkte berechnen
+          let self = this
+          if (this.currentGame.currentWinner) {
+            fb.gamesCollection.doc(this.gameId).collection('players').doc(this.currentGame.currentWinner).get().then(function (doc) {
+              let scoreWinner = doc.data().score + 1
+              fb.gamesCollection.doc(self.gameId).collection('players').doc(self.currentGame.currentWinner).set({
+                score: scoreWinner
+              }, { merge: true })
+            })
+          }
+          // Verlierer Punkte berechnen
+          if (this.currentGame.currentLooser) {
+            fb.gamesCollection.doc(this.gameId).collection('players').doc(this.currentGame.currentLooser).get().then(function (doc) {
+              let scoreLooser = doc.data().score - 1
+              fb.gamesCollection.doc(self.gameId).collection('players').doc(self.currentGame.currentLooser).set({
+                score: scoreLooser
+              }, { merge: true })
+            })
+          }
+        }
+        this.firstRound = false
         let questionsArray = []
         let self = this
         // ID's aller Fragen holen (unschöner Workarozund aufgrund Zeitmangel)
@@ -132,7 +163,6 @@
             tempItem.id = doc.id
             questionsArray.push(tempItem)
           })
-          console.log(questionsArray)
           // ID vom aktueller Quizfrage im aktuellen Game eintragen
           fb.gamesCollection.doc(self.gameId).set({
             currentQuestion: questionsArray[self.randomValue(0, 88)].id,
@@ -141,7 +171,6 @@
           })
 
           for (let i = 1; i < 5; i++) {
-            console.log('sdf')
             let r = Math.floor(Math.random() * Math.floor(100))
             document.getElementById('btn-' + i).style.order = r
           }
@@ -154,6 +183,13 @@
           .onSnapshot(function (doc) {
             self.currentGame = doc.data()
             self.getQuestion()
+          })
+      },
+      getGameUserData: function () {
+        let self = this
+        fb.gamesCollection.doc(this.gameId).collection('players').doc(self.currentUser.uid)
+          .onSnapshot(function (doc) {
+            self.currentGameUserData = doc.data()
           })
       },
       getQuestion: function () {

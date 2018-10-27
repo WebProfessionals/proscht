@@ -68,8 +68,9 @@
     },
     methods: {
       joinGame: function () {
-        fb.gamesCollection.doc(this.gameId).collection('players').add({ // todo: rückgabewert der DB prüfen
-          player: this.currentUser.uid
+        fb.gamesCollection.doc(this.gameId).collection('players').doc(this.currentUser.uid).set({
+          player: this.currentUser.uid,
+          score: 3
         }).then(ref => {
           this.gameId = ref.id
           console.log(ref)
