@@ -28,8 +28,9 @@ export default {
 </script>
 
 <style scoped>
+
   body {
-    font-family: 'Roboto', sans-serif;
+      font-family: 'IBM Plex Sans', sans-serif;
   }
 
   .container {
