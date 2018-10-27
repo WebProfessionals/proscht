@@ -67,7 +67,7 @@
   .power-up_points--container {
     border-right: 2px solid gray;
     box-shadow: 0px 2px 10px black;
-    height: 5rem;
+    height: 100%;
   }
 
   .game-board_footer {
@@ -75,10 +75,18 @@
       border-top: 3px solid red;
       height: 10rem;
     }
+
+  .live_icon {
+    height: 3rem;
+  }
+
   .game-board_body {
     background-color: black;
     color: white;
     height: calc(100vh - 15rem);
+  }
+  .game-board_header {
+    height: 5rem;
   }
 
 </style>
