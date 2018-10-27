@@ -9,6 +9,7 @@
         <v-layout row justify-end>
           <v-flex xs4>
             <img class="icon" src="@/assets/img/heart-dummy.svg" v-if="currentGameUserData.score>0">
+            <v-btn v-if="currentGameUserData.score<1" v-on:click="resetScore">Neu einsteigen</v-btn>
           </v-flex>
           <v-flex xs4>
             <img class="icon" src="@/assets/img/heart-dummy.svg" v-if="currentGameUserData.score>1">
@@ -128,6 +129,11 @@
     methods: {
       randomValue: function (min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min
+      },
+      resetScore: function () {
+        fb.gamesCollection.doc(this.gameId).collection('players').doc(this.currentUser.uid).set({
+          score: 3
+        }, { merge: true })
       },
       startRound: function () {
         if (!this.firstRound) {

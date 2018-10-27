@@ -13,6 +13,8 @@
         <div v-if="gameId" class="linkBox">
             <code id="gameLink"> http://localhost:8080/#/join?gid={{ gameId }} </code>
             <v-btn small class="btnCopy text-xs-center" v-on:click="copyGameLink">copy</v-btn>
+          <br>
+          <v-btn v-on:click="startGame">Spiel starten</v-btn>
         </div>
         <br>
         UID: {{currentUser.uid}}<br>
@@ -38,6 +40,9 @@
     mounted: function () {
     },
     methods: {
+      startGame: function () {
+        this.$router.push({ path: 'gameboard', query: { gid: this.gameId } })
+      },
       createGame: function () {
         fb.gamesCollection.add({
           gamename: this.gameName
