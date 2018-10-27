@@ -5,10 +5,33 @@
       <div>
         <v-container fluid grid-list-xl>
           <h2 class="display-3">Wähle deine Figur</h2>
-          <v-btn class="player-button"><img src="@/assets/img/luckyluke.svg" alt="Lucky Luke"></v-btn>
-          <v-btn class="player-button"><img src="@/assets/img/supermario.svg" alt="Lucky Luke"></v-btn>
-          <v-btn class="player-button"><img src="@/assets/img/lukeskywalker.svg" alt="Lucky Luke"></v-btn>
-          <v-btn class="player-button"><img src="@/assets/img/peach.svg" alt="Lucky Luke"></v-btn>
+
+          <div class="avatar">
+            <v-btn class="player-button"><img src="@/assets/img/luckyluke.svg" alt="Lucky Luke">
+            </v-btn>
+            <h2>Name</h2>
+          </div>
+
+          <div class="avatar">
+            <v-btn class="player-button"><img src="@/assets/img/supermario.svg" alt="Super Mario">
+            </v-btn>
+            <h2>Name</h2>
+          </div>
+
+
+          <div class="avatar">
+            <v-btn class="player-button"><img src="@/assets/img/lukeskywalker.svg" alt="Luke Skywalker">
+            </v-btn>
+            <h2>Name</h2>
+          </div>
+
+
+          <div class="avatar">
+            <v-btn class="player-button"><img src="@/assets/img/peach.svg" alt="Peach">
+            </v-btn>
+            <h2>Name</h2>
+          </div>
+
         </v-container>
         <br>
         <v-text-field
@@ -85,6 +108,10 @@
       color: white;
       width: 15em;
       height: 50px;
+      font-size: 25px;
+    }
+    .avatar {
+      display: inline-block;
     }
 
     .v-btn__content {
