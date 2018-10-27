@@ -26,10 +26,10 @@
     </v-layout>
     <v-layout row wrap class="game-board_footer">
       <v-flex xs2>
-        <img src="@/assets/img/powerUp-dummy.svg">
+        <img src="@/assets/img/attack.svg">
       </v-flex>
       <v-flex xs2>
-        <img src="@/assets/img/powerUp-dummy.svg">
+        <img src="@/assets/img/shield.svg">
       </v-flex>
       <v-flex xs2>
         <img src="@/assets/img/powerUp-dummy.svg">
@@ -71,7 +71,7 @@
   }
 
   .game-board_footer {
-      background-color: grey;
+      background-color: white;
       border-top: 3px solid yellow;
       height: 10rem;
     }

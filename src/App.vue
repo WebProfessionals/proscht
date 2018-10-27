@@ -27,11 +27,10 @@ export default {
 }
 </script>
 
-<style scoped>
-  body {
-    font-family: 'Roboto', sans-serif;
+<style>
+  div {
+    font-family: 'VT323', monospace;
   }
-
   .container {
     padding: 0;
   }
