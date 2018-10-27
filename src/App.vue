@@ -27,9 +27,13 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+  .display-2, .display-3, div {
+    font-family: 'VT323', monospace!important;
+  }
 
   body {
+    font-size: 18px;
     background-color: #fff;
     margin: 0;
     padding: 0;
