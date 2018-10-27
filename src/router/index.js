@@ -5,6 +5,7 @@ import Home from '@/components/Home'
 import GameBoard from '@/components/GameBoard'
 import Auth from '@/components/Auth'
 import AuthSuccess from '@/components/AuthSuccess'
+import ShareLink from '@/components/ShareLink'
 
 Vue.use(Router)
 
@@ -39,6 +40,11 @@ export default new Router({
       path: '/success',
       name: 'AuthSuccess',
       component: AuthSuccess
+    },
+    {
+      path: '/link',
+      name: 'ShareLink',
+      component: ShareLink
     }
   ]
 })
