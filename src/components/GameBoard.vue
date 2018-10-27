@@ -8,13 +8,13 @@
       <v-flex xs6>
         <v-layout row justify-end>
           <v-flex xs4>
-            <img class="live_icon" src="@/assets/img/heart-dummy.svg">
+            <img class="icon" src="@/assets/img/heart-dummy.svg">
           </v-flex>
           <v-flex xs4>
-            <img class="live_icon" src="@/assets/img/heart-dummy.svg">
+            <img class="icon" src="@/assets/img/heart-dummy.svg">
           </v-flex>
           <v-flex xs4>
-            <img class="live_icon" src="@/assets/img/heart-dummy.svg">
+            <img class="icon" src="@/assets/img/heart-dummy.svg">
           </v-flex>
         </v-layout>
       </v-flex>
@@ -37,30 +37,30 @@
         Antwort 4: {{currentQuestion.answer4}}<br>
       </v-flex>
     </v-layout>
-    <v-layout row wrap class="game-board_footer">
+    <v-layout row align-center wrap class="game-board_footer">
       <v-flex xs2>
-        <img src="@/assets/img/powerUp-dummy.svg">
+        <img class="icon" src="@/assets/img/attack.svg">
       </v-flex>
       <v-flex xs2>
-        <img src="@/assets/img/powerUp-dummy.svg">
+        <img class="icon" src="@/assets/img/shield.svg">
       </v-flex>
       <v-flex xs2>
-        <img src="@/assets/img/powerUp-dummy.svg">
+        <img class="icon" src="@/assets/img/bomb.svg">
       </v-flex>
       <v-flex xs2>
-        <img src="@/assets/img/powerUp-dummy.svg">
+
       </v-flex>
       <v-flex xs2>
-        <img src="@/assets/img/powerUp-dummy.svg">
+
       </v-flex>
       <v-flex xs2>
-        <img src="@/assets/img/powerUp-dummy.svg">
+
       </v-flex>
       <v-flex xs2>
-        <img src="@/assets/img/powerUp-dummy.svg">
+
       </v-flex>
       <v-flex xs2>
-        <img src="@/assets/img/powerUp-dummy.svg">
+
       </v-flex>
     </v-layout>
   </v-container>
@@ -146,22 +146,26 @@
   .power-up_points--container {
     border-right: 2px solid gray;
     box-shadow: 0px 2px 10px black;
-    height: 5rem;
+    height: 100%;
   }
 
   .game-board_footer {
-      background-color: grey;
-      border-top: 3px solid yellow;
+      background-color: white;
+      border-top: 3px solid red;
       height: 10rem;
     }
+
+  .icon {
+    height: 3rem;
+  }
+
   .game-board_body {
     background-color: black;
     color: white;
     height: calc(100vh - 15rem);
   }
   .game-board_header {
-    background-color: yellow;
-    border-bottom: 3px solid grey;
+    height: 5rem;
   }
 
 </style>
