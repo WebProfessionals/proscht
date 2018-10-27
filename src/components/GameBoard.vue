@@ -160,6 +160,7 @@
         let self = this
         fb.gamesCollection.doc(this.gameId).get().then(function (doc) {
           if (doc.exists) {
+            console.log(doc.data().currentWinner)
             if (doc.data().currentWinner) {
               fb.gamesCollection.doc(self.gameId).set({
                 currentLooser: self.currentUser.uid
@@ -172,10 +173,6 @@
             }
           }
         })
-        fb.gamesCollection.doc(this.gameId).set({
-          currentWinner: this.currentUser.uid,
-          currentLooser: this.currentUser.uid
-        }, { merge: true })
       }
     }
   }
