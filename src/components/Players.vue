@@ -3,7 +3,7 @@
         <v-container fluid grid-list-xl>
         <h2 class="display-3">Wähle deine Figur</h2>
         <v-btn class="player-button"><img src="@/assets/img/luckyluke.svg" alt="Lucky Luke"></v-btn>
-        <v-btn class="player-button"><img src="@/assets/img/luckyluke.svg" alt="Lucky Luke"></v-btn>
+        <v-btn class="player-button"><img src="@/assets/img/supermario.svg" alt="Lucky Luke"></v-btn>
         <v-btn class="player-button"><img src="@/assets/img/luckyluke.svg" alt="Lucky Luke"></v-btn>
         <v-btn class="player-button"><img src="@/assets/img/luckyluke.svg" alt="Lucky Luke"></v-btn>
         </v-container>
