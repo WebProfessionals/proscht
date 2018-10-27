@@ -1,12 +1,9 @@
 <template>
   <v-app>
-<<<<<<< HEAD
     <v-content>
       <router-view/>
     </v-content>
-=======
       <router-view/>
->>>>>>> 358bc69b818ad38b6ac2b46869dd206a5ace5693
   </v-app>
 </template>
 
