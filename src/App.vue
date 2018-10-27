@@ -29,11 +29,7 @@ export default {
 
 <style scoped>
   body {
-  }
-
-  .display-2, .display-3 {
-    font-family: "American Typewriter", sans-serif;
-    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
   }
 
   .container {
