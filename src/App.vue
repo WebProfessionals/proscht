@@ -28,6 +28,9 @@ export default {
 </script>
 
 <style scoped>
+  body {
+    font-family: "American Typewriter", sans-serif;
+  }
   .container {
     padding: 0;
   }
