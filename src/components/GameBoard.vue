@@ -184,13 +184,31 @@
     height: 3rem;
   }
 
+  .name_id {
+    display: none;
+  }
+
   .game-board_body {
     background-color: black;
     color: white;
-    height: calc(100vh - 15rem);
   }
   .game-board_header {
     height: 5rem;
   }
+
+  .v-btn.answer.btn-1 {
+    background-color: #f1bf2c;
+  }
+
+  .v-btn.answer.btn-2 {
+    background-color: #be1524;
+  }
+  .v-btn.answer.btn-3 {
+    background-color: #218ab7;
+  }
+  .v-btn.answer.btn-4 {
+    background-color: #d11475;
+  }
+
 
 </style>
