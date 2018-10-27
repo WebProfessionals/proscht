@@ -42,16 +42,16 @@
           </v-flex>
         </v-layout>
         <v-layout row wrap>
-          <v-flex xs12>
+          <v-flex xs12 id="btn-1">
             <v-btn block class="answer btn-1" v-on:click="saveAnswer">Antwort 1: {{currentQuestion.answer1}}</v-btn>
           </v-flex>
-          <v-flex xs12>
+          <v-flex xs12 id="btn-2">
             <v-btn block class="answer btn-2" v-on:click="saveAnswer">Antwort 2: {{currentQuestion.answer2}}</v-btn>
           </v-flex>
-          <v-flex xs12>
+          <v-flex xs12 id="btn-3">
             <v-btn block class="answer btn-3" v-on:click="saveAnswer">Antwort 3: {{currentQuestion.answer3}}</v-btn>
           </v-flex>
-          <v-flex xs12>
+          <v-flex xs12 id="btn-4">
             <v-btn block class="answer btn-4" v-on:click="saveAnswer">Antwort 4: {{currentQuestion.answer4}}</v-btn>
           </v-flex>
         </v-layout>
@@ -135,6 +135,12 @@
             currentWinner: null,
             currentLooser: null
           })
+
+          for (let i = 1; i < 5; i++) {
+            console.log('sdf')
+            let r = Math.floor(Math.random() * Math.floor(100))
+            document.getElementById('btn-' + i).style.order = r
+          }
         })
       },
       getGameData: function () {
@@ -160,7 +166,6 @@
         let self = this
         fb.gamesCollection.doc(this.gameId).get().then(function (doc) {
           if (doc.exists) {
-            console.log(doc.data().currentWinner)
             if (doc.data().currentWinner) {
               fb.gamesCollection.doc(self.gameId).set({
                 currentLooser: self.currentUser.uid
@@ -173,6 +178,10 @@
             }
           }
         })
+        fb.gamesCollection.doc(this.gameId).set({
+          currentWinner: this.currentUser.uid,
+          currentLooser: this.currentUser.uid
+        }, { merge: true })
       }
     }
   }
