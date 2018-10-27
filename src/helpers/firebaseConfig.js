@@ -23,7 +23,7 @@ db.settings(settings)
 
 // firebase collections
 const gamesCollection = db.collection('games')
-const quizCollection = db.collection('questions')
+const quizCollection = db.collection('quiz')
 
 export {
   firebase,

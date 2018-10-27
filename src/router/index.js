@@ -8,6 +8,7 @@ import AuthSuccess from '@/components/AuthSuccess'
 import ShareLink from '@/components/ShareLink'
 import JoinGame from '@/components/JoinGame'
 import Drink from '@/components/Drink'
+import Import from '@/components/Import'
 
 Vue.use(Router)
 
@@ -57,6 +58,11 @@ export default new Router({
       path: '/drink',
       name: 'Drink',
       component: Drink
+    },
+    {
+      path: '/import',
+      name: 'Import',
+      component: Import
     }
   ]
 })
