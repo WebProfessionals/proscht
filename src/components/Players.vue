@@ -4,7 +4,7 @@
         <h2 class="display-3">Wähle deine Figur</h2>
         <v-btn class="player-button"><img src="@/assets/img/luckyluke.svg" alt="Lucky Luke"></v-btn>
         <v-btn class="player-button"><img src="@/assets/img/supermario.svg" alt="Lucky Luke"></v-btn>
-        <v-btn class="player-button"><img src="@/assets/img/luckyluke.svg" alt="Lucky Luke"></v-btn>
+        <v-btn class="player-button"><img src="@/assets/img/lukeskywalker.svg" alt="Lucky Luke"></v-btn>
         <v-btn class="player-button"><img src="@/assets/img/luckyluke.svg" alt="Lucky Luke"></v-btn>
         </v-container>
     </div>
@@ -17,9 +17,9 @@
         margin-bottom: 40px;
     }
     .player-button {
-        width: 15em;
+        width: 12em;
         height: auto;
-        padding: 20px;
+        padding: 40px;
     }
 
     .theme--light.v-btn:not(.v-btn--icon):not(.v-btn--flat) {
