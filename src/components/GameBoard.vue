@@ -70,7 +70,7 @@
     name: 'GameBoard',
     data () {
       return {
-        gameId: 'EAyGOxrVuLfYoAj7WLlS',
+        gameId: this.$route.query.gid,
         currentGame: {
           currentQuestion: null
         },
