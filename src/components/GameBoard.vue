@@ -21,12 +21,25 @@
     </v-layout>
     <v-layout class="game-board_body" align-center justify-center row fill-height>
       <v-flex xs12>
-        Game: {{gameId}}
-        <br>
-        <v-btn v-on:click="startRound">Runde starten</v-btn>
+        <v-layout row>
+          <v-flex xs12>
+            Game: {{gameId}}
+          </v-flex>
+        </v-layout>
+        <v-layout row>
+          <v-flex xs12>
+            <v-btn class="btn--new" block v-on:click="startRound">Runde starten</v-btn>
+          </v-flex>
+        </v-layout>
+        <v-layout row>
+          <v-flex xs12 class="name_id">
+            ID aktuelle Frage: {{currentGame.currentQuestion}}<br>
+          </v-flex>
+        </v-layout>
 
-        <hr>
-        ID aktuelle Frage: {{currentGame.currentQuestion}}<br>
+
+
+
         Frage: {{currentQuestion.question}}<br>
         Antwort 1: {{currentQuestion.answer1}}<br>
         Antwort 2: {{currentQuestion.answer2}}<br>
