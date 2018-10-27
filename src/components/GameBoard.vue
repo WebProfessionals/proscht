@@ -23,7 +23,9 @@
       <v-flex xs12>
         <v-layout row>
           <v-flex xs12>
-            Game: {{gameId}}
+            Game: {{gameId}}<br>
+            Winner: {{currentGame.currentWinner}}<br>
+            Looser: {{currentGame.currentLooser}}<br>
           </v-flex>
         </v-layout>
         <v-layout row>
@@ -95,7 +97,9 @@
       return {
         gameId: this.$route.query.gid,
         currentGame: {
-          currentQuestion: null
+          currentQuestion: null,
+          currentWinner: null,
+          currentLooser: null
         },
         allQuestions: [],
         currentQuestionId: null,
@@ -167,8 +171,7 @@
               }, { merge: true })
             } else {
               fb.gamesCollection.doc(self.gameId).set({
-                currentWinner: self.currentUser.uid,
-                currentLooser: self.currentUser.uid
+                currentWinner: self.currentUser.uid
               }, { merge: true })
             }
           }
