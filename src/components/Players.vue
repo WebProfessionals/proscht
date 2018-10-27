@@ -1,23 +1,16 @@
 <template>
-    <v-container fluid>
-        <v-layout column align-center>
-            <ul class="">
-                <li><img src="@/assets/img/luckyluke.svg" alt="Proscht" class="logo"></li>
-                <li><img src="@/assets/img/luckyluke.svg" alt="Proscht" class="logo"></li>
-                <li><img src="@/assets/img/luckyluke.svg" alt="Proscht" class="logo"></li>
-                <li><img src="@/assets/img/luckyluke.svg" alt="Proscht" class="logo"></li>
-            </ul>
-        </v-layout>
-    </v-container>
+    <div class="text-xs-center">
+        <v-btn outline color="indigo"><img src="@/assets/img/luckyluke.svg" alt="Lucky Luke" class="players"></v-btn>
+    </div>
 </template>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-    .logo {
-        position: absolute;
-        margin-left: auto;
-        margin-right: auto;
-        width: 30em;
-        height: auto;
+    .player-buttons {
+        list-style-type: none;
+        display: inline-block;
+    }
+    .players {
+        width: 6em;
     }
 </style>
