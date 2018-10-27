@@ -27,9 +27,13 @@ export default {
 }
 </script>
 
-<style>
-  div {
-    font-family: 'VT323', monospace;
+<style scoped>
+
+  body {
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
   }
   .container {
     padding: 0;
