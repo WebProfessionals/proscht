@@ -22,10 +22,10 @@ const settings = {
 db.settings(settings)
 
 // firebase collections
-const games = db.collection('games')
+const gamesCollection = db.collection('games')
 
 export {
   auth,
   currentUser,
-  games
+  gamesCollection
 }
