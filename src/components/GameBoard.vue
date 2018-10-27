@@ -21,7 +21,20 @@
     </v-layout>
     <v-layout class="game-board_body" align-center justify-center row fill-height>
       <v-flex xs12>
-        GAME ON!
+        Game: {{gameId}}
+        <br>
+        <v-btn v-on:click="startRound">Runde starten</v-btn>
+        <hr>
+        aktuelle Frage Id: {{currentQuestionId}}
+        <hr>
+        Aktuelles Game: {{currentGame}}
+        <hr>
+        ID aktuelle Frage: {{currentGame.currentQuestion}}<br>
+        Frage: {{currentQuestion.question}}<br>
+        Antwort 1: {{currentQuestion.answer1}}<br>
+        Antwort 2: {{currentQuestion.answer2}}<br>
+        Antwort 3: {{currentQuestion.answer3}}<br>
+        Antwort 4: {{currentQuestion.answer4}}<br>
       </v-flex>
     </v-layout>
     <v-layout row wrap class="game-board_footer">
@@ -52,6 +65,72 @@
     </v-layout>
   </v-container>
 </template>
+
+<script>
+  import { mapState } from 'vuex'
+  const fb = require('../helpers/firebaseConfig')
+  export default {
+    name: 'GameBoard',
+    data () {
+      return {
+        gameId: 'EAyGOxrVuLfYoAj7WLlS',
+        currentGame: {
+          currentQuestion: null
+        },
+        allQuestions: [],
+        currentQuestionId: null,
+        currentQuestion: {
+          question: '',
+          answer1: '',
+          answer2: '',
+          answer3: '',
+          answer4: ''
+        }
+      }
+    },
+    computed: {
+      ...mapState(['currentUser'])
+    },
+    mounted: function () {
+      this.getGameData()
+    },
+    methods: {
+      startRound: function () {
+        let randomQuestion = 0 // TODO: Zufallszahl
+        let questionsArray = []
+        let self = this
+        // alle Fragen holen (unschöbner Workarozund aufgrund Zeitmangel)
+        fb.quizCollection.get().then(function (querySnapshot) {
+          querySnapshot.forEach(function (doc) {
+            let tempItem = doc.data()
+            tempItem.id = doc.id
+            questionsArray.push(tempItem)
+          })
+          // aktuelles Spiel eintragen
+          fb.gamesCollection.doc(self.gameId).set({
+            currentQuestion: questionsArray[randomQuestion].id
+          })
+        })
+      },
+      getGameData: function () {
+        let self = this
+        fb.gamesCollection.doc(this.gameId)
+          .onSnapshot(function (doc) {
+            self.currentGame = doc.data()
+            self.getQuestion()
+          })
+      },
+      getQuestion: function () {
+        let self = this
+        self.currentQuestion = {}
+        fb.quizCollection.doc(this.currentGame.currentQuestion)
+          .onSnapshot(function (doc) {
+            self.currentQuestion = doc.data()
+          })
+      }
+    }
+  }
+</script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
