@@ -54,23 +54,36 @@
     data () {
       return {
         gameId: this.$route.query.gid,
-        gamerName: null
+        gamerName: null,
+        uid: null
       }
     },
     computed: {
       ...mapState(['currentUser'])
     },
     mounted: function () {
+      this.auth()
     },
     methods: {
+      auth: function () {
+        let self = this
+        fb.auth.signInAnonymously().then(user => {
+          self.uid = user.user.uid
+          this.$store.commit('setCurrentUser', user)
+        }).catch(err => {
+          console.log(err)
+        })
+      },
       joinGame: function () {
         let self = this
-        fb.gamesCollection.doc(this.gameId).collection('players').doc(this.currentUser.uid).set({
-          player: this.currentUser.uid,
+        fb.gamesCollection.doc(this.gameId).collection('players').doc(self.uid).set({
+          player: self.uid,
           score: 3,
-          name: this.gamerName
+          name: self.gamerName
         }).then(ref => {
           // self.gameId = ref.id
+          let userName = {name: self.gamerName}
+          localStorage.setItem('currentUserName', JSON.stringify(userName))
           self.$router.push({ path: 'gameboard', query: { gid: self.gameId } })
         }).catch(err => {
           console.log(err)

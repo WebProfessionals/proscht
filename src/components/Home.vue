@@ -11,14 +11,11 @@
 
         <h5 v-if="gameId" class="lbl text-xs-center">invite players with this link:</h5>
         <div v-if="gameId" class="linkBox">
-            <code id="gameLink"> http://localhost:8080/#/join?gid={{ gameId }} </code>
+            <code id="gameLink">{{joinURL}}?gid={{ gameId }} </code>
             <v-btn small class="btnCopy text-xs-center" v-on:click="copyGameLink">copy</v-btn>
           <br>
           <v-btn v-on:click="startGame">Spiel starten</v-btn>
         </div>
-        <br>
-        UID: {{currentUser.uid}}<br>
-        <p v-if="gameId">gameId: {{gameId}}</p>
     </div>
 </template>
 
@@ -35,17 +32,31 @@
       }
     },
     computed: {
-      ...mapState(['currentUser'])
+      ...mapState(['currentUser']),
+      joinURL: function () {
+        let url = window.location.href
+        let arr = url.split('/')
+        return arr[0] + '//' + arr[2] + '/#/join'
+      }
     },
     mounted: function () {
+      this.auth()
     },
     methods: {
+      auth: function () {
+        fb.auth.signInAnonymously().then(user => {
+          this.$store.commit('setCurrentUser', user)
+        }).catch(err => {
+          console.log(err)
+        })
+      },
       startGame: function () {
         this.$router.push({ path: 'join', query: { gid: this.gameId } })
       },
       createGame: function () {
         fb.gamesCollection.add({
-          gamename: this.gameName
+          gamename: this.gameName,
+          firstround: true
         }).then(ref => {
           this.gameId = ref.id
         }).catch(err => {

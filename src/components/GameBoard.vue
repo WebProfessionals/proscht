@@ -24,13 +24,11 @@
       <v-flex xs12>
         <v-layout row>
           <v-flex xs12>
-            Game: {{gameId}}<br>
-            Winner: {{currentGame.currentWinner}}<br>
-            Looser: {{currentGame.currentLooser}}<br>
-            Score: {{currentGameUserData.score}}<br>
-            FirstRound: {{firstRound}}
+            Winner: {{currentGame.currentWinnerName}}<br>
+            Looser: {{currentGame.currentLooserName}}<br>
+            Dein Score: {{currentGameUserData.score}}<br>
           </v-flex>
-        </v-layout>
+r       </v-layout>
         <v-layout row>
           <v-flex xs12>
             <v-btn class="btn--new" block v-on:click="startRound">Neue Runde starten</v-btn>
@@ -41,12 +39,12 @@
             ID aktuelle Frage: {{currentGame.currentQuestion}}<br>
           </v-flex>
         </v-layout>
-        <v-layout row>
+        <v-layout row v-if="!currentGame.firstround">
           <v-flex xs12 class="question">
             Frage: {{currentQuestion.question}}
           </v-flex>
         </v-layout>
-        <v-layout row wrap>
+        <v-layout row wrap v-if="!currentGame.firstround">
           <v-flex xs12 id="btn-1">
             <v-btn block class="answer btn-1" v-on:click="saveAnswer(true)">{{currentQuestion.answer1}}</v-btn>
           </v-flex>
@@ -98,13 +96,18 @@
     name: 'GameBoard',
     data () {
       return {
+        uid: null,
         firstRound: true,
+        voted: false,
         gameId: this.$route.query.gid,
         currentGame: {
           currentQuestion: null,
           currentWinner: null,
-          currentLooser: null
+          currentWinnerName: null,
+          currentLooser: null,
+          currentLooserName: null
         },
+        currentUsername: null,
         currentGameUserData: {
           score: 3
         },
@@ -123,45 +126,59 @@
       ...mapState(['currentUser'])
     },
     mounted: function () {
-      this.getGameUserData()
+      this.auth()
       this.getGameData()
+      this.currrentUserName = JSON.parse(localStorage.getItem('currentUserName')).name
+    },
+    watch: {
+      currentQuestion: {
+        handler: function (newValue) {
+          this.voted = false
+        },
+        deep: true
+      }
     },
     methods: {
+      auth: function () {
+        let self = this
+        fb.auth.signInAnonymously().then(user => {
+          self.uid = user.user.uid
+          this.$store.commit('setCurrentUser', user)
+          this.getGameUserData()
+        }).catch(err => {
+          console.log(err)
+        })
+      },
       randomValue: function (min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min
       },
       resetScore: function () {
-        fb.gamesCollection.doc(this.gameId).collection('players').doc(this.currentUser.uid).set({
+        fb.gamesCollection.doc(this.gameId).collection('players').doc(this.uid).set({
           score: 3
         }, { merge: true })
       },
       startRound: function () {
-        if (!this.firstRound) {
-          console.log(this.currentGame.currentWinner)
-          console.log(this.currentGame.currentLooser)
-          // Gewinner Punkte berechnen
-          let self = this
-          if (this.currentGame.currentWinner) {
-            fb.gamesCollection.doc(this.gameId).collection('players').doc(this.currentGame.currentWinner).get().then(function (doc) {
-              let scoreWinner = doc.data().score + 1
-              fb.gamesCollection.doc(self.gameId).collection('players').doc(self.currentGame.currentWinner).set({
-                score: scoreWinner
-              }, { merge: true })
-            })
-          }
-          // Verlierer Punkte berechnen
-          if (this.currentGame.currentLooser) {
-            fb.gamesCollection.doc(this.gameId).collection('players').doc(this.currentGame.currentLooser).get().then(function (doc) {
-              let scoreLooser = doc.data().score - 1
-              fb.gamesCollection.doc(self.gameId).collection('players').doc(self.currentGame.currentLooser).set({
-                score: scoreLooser
-              }, { merge: true })
-            })
-          }
+        // Gewinner Punkte berechnen
+        let self = this
+        if (this.currentGame.currentWinner) {
+          fb.gamesCollection.doc(this.gameId).collection('players').doc(this.currentGame.currentWinner).get().then(function (doc) {
+            let scoreWinner = doc.data().score + 1
+            fb.gamesCollection.doc(self.gameId).collection('players').doc(self.currentGame.currentWinner).set({
+              score: scoreWinner
+            }, { merge: true })
+          })
+        }
+        // Verlierer Punkte berechnen
+        if (this.currentGame.currentLooser) {
+          fb.gamesCollection.doc(this.gameId).collection('players').doc(this.currentGame.currentLooser).get().then(function (doc) {
+            let scoreLooser = doc.data().score - 1
+            fb.gamesCollection.doc(self.gameId).collection('players').doc(self.currentGame.currentLooser).set({
+              score: scoreLooser
+            }, { merge: true })
+          })
         }
         this.firstRound = false
         let questionsArray = []
-        let self = this
         // ID's aller Fragen holen (unschöner Workarozund aufgrund Zeitmangel)
         fb.quizCollection.get().then(function (querySnapshot) {
           querySnapshot.forEach(function (doc) {
@@ -173,7 +190,8 @@
           fb.gamesCollection.doc(self.gameId).set({
             currentQuestion: questionsArray[self.randomValue(0, 88)].id,
             currentWinner: null,
-            currentLooser: null
+            currentLooser: null,
+            firstround: false
           })
 
           for (let i = 1; i < 5; i++) {
@@ -184,6 +202,7 @@
       },
       getGameData: function () {
         // ID der aktuellen Quizfrage laden
+        console.log('game loading')
         let self = this
         fb.gamesCollection.doc(this.gameId)
           .onSnapshot(function (doc) {
@@ -193,7 +212,8 @@
       },
       getGameUserData: function () {
         let self = this
-        fb.gamesCollection.doc(this.gameId).collection('players').doc(self.currentUser.uid)
+        console.log('uid' + self.uid)
+        fb.gamesCollection.doc(this.gameId).collection('players').doc(self.uid)
           .onSnapshot(function (doc) {
             self.currentGameUserData = doc.data()
           })
@@ -202,27 +222,34 @@
         // Fragen und Antworten der aktuellen Quizfrage laden
         let self = this
         self.currentQuestion = {}
-        fb.quizCollection.doc(this.currentGame.currentQuestion)
+        fb.quizCollection.doc(self.currentGame.currentQuestion)
           .onSnapshot(function (doc) {
             self.currentQuestion = doc.data()
           })
       },
       saveAnswer: function (result) {
         // first or not?
-        let self = this
-        fb.gamesCollection.doc(this.gameId).get().then(function (doc) {
-          if (doc.exists) {
-            if (doc.data().currentWinner || result === false) {
-              fb.gamesCollection.doc(self.gameId).set({
-                currentLooser: self.currentUser.uid
-              }, { merge: true })
-            } else {
-              fb.gamesCollection.doc(self.gameId).set({
-                currentWinner: self.currentUser.uid
-              }, { merge: true })
+        if (!this.voted) {
+          let self = this
+          self.voted = true
+          fb.gamesCollection.doc(this.gameId).get().then(function (doc) {
+            if (doc.exists) {
+              if (doc.data().currentWinner || result === false) {
+                fb.gamesCollection.doc(self.gameId).set({
+                  currentLooser: self.uid,
+                  currentLooserName: self.currrentUserName,
+                  firstround: false
+                }, { merge: true })
+              } else {
+                fb.gamesCollection.doc(self.gameId).set({
+                  currentWinner: self.uid,
+                  currentWinnerName: self.currrentUserName,
+                  firstround: false
+                }, { merge: true })
+              }
             }
-          }
-        })
+          })
+        }
       }
     }
   }

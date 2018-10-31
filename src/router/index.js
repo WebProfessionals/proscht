@@ -25,11 +25,6 @@ export default new Router({
       component: Players
     },
     {
-      path: '/home',
-      name: 'Home',
-      component: Home
-    },
-    {
       path: '/gameboard',
       name: 'GameBoard',
       component: GameBoard
